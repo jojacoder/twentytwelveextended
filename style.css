@@ -1,0 +1,164 @@
+/*
+Theme Name: Twenty Twelve Extended (child of twentytwelve)
+Template: twentytwelve
+Theme URI: http://github.com/jojacoder/twentytwelveextended
+Author: Jonas Hjalmarsson
+Author URI: http://web111.se/
+Description: Extended child of the official 2012 theme for WordPress, which is a fully responsive theme that looks great on any device. Features include a front page template with a its own widgets, an optional display font, styling for post formats on both index and single views, and an optional no-sidebar page template. Make it yours with a custom menu, header image, and background. Extended with up to four dynamic footer widgets columns, Extended Theme Settings page with free-text css field, logo upload and more to come.
+Version: 1.0.2
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: light, gray, white, one-column, two-columns, right-sidebar, flexible-width, custom-background, custom-header, custom-menu, editor-style, featured-images, flexible-header, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
+Text Domain: twentytwelve
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+/* =Notes
+--------------------------------------------------------------
+The twentytwelve stylesheet uses rem values with a pixel fallback. The rem
+values (and line heights) are calculated using two variables:
+
+$rembase:     14;
+$line-height: 24;
+
+---------- Examples
+
+* Use a pixel value with a rem fallback for font-size, padding, margins, etc.
+	padding: 5px 0;
+	padding: 0.357142857rem 0; (5 / $rembase)
+
+* Set a font-size and then set a line-height based on the font-size
+	font-size: 16px
+	font-size: 1.142857143rem; (16 / $rembase)
+	line-height: 1.5; ($line-height / 16)
+
+---------- Vertical spacing
+
+Vertical spacing between most elements should use 24px or 48px
+to maintain vertical rhythm:
+
+.my-new-div {
+	margin: 24px 0;
+	margin: 1.714285714rem 0; ( 24 / $rembase )
+}
+
+---------- Further reading
+
+http://snook.ca/archives/html_and_css/font-size-with-rem
+http://blog.typekit.com/2011/11/09/type-study-sizing-the-legible-letter/
+
+-------------------------------------------------------------- */
+
+@import url("../twentytwelve/style.css");
+
+#page {
+	border-radius: 2px;
+}
+.clear {
+	clear: both;
+}
+
+.child-content {
+	padding: 7px 0;
+	padding: 0.5rem 0;
+	margin-bottom: 7px;
+	margin-bottom: 0.5rem;
+}
+.child-content .entry-title {
+	font-size: 14px;
+	font-size: 1rem;
+}
+.child-content .entry-content {
+	display: none;
+}
+.child-content .entry-title a {
+	color: #444;
+}
+.child-content.visible {
+	border-left: 4px solid #999;
+	padding-left: 8px;
+}
+.child-content.visible .entry-title a {
+	color: #444;
+}
+.child-content .entry-content p {
+	margin: 0 0 14px;
+	margin: 0 0 1rem;
+}
+.sublevel-3,
+.sublevel-4,
+.sublevel-5 {
+	padding-left: 14px;
+	padding-left: 1rem 0;
+}
+
+#footer-widgets {
+	float: none;
+	width: 100%;
+}
+#footer-widgets.two .footer-widgets,
+#footer-widgets.three .footer-widgets {
+	width: 100%;
+}
+
+#tte_expand_collapse_children {
+	float: right;
+}
+
+/* RECENT FACEBOOK POSTS PLUGIN */
+.widget_rfb_widget li {
+	list-style-type: none !important;
+	margin-bottom: 1.714285714rem !important;
+	margin-bottom: 24px;
+}
+.widget_rfb_widget .rfb_text {
+	float: left;
+	width: 70%;
+	clear: none;
+}
+.widget_rfb_widget .rfb_image {
+	float: left;
+	width: 28%;
+	margin-left: 2%;
+	clear: none;
+}
+.widget_rfb_widget .rfb_image img {
+	width: 100%;
+}
+.widget_rfb_widget p {
+	clear: both;
+	margin-bottom: 0 !important;
+}
+
+/* =Media queries
+-------------------------------------------------------------- */
+
+/* Min width of 600 pixels. */
+@media screen and (min-width: 600px) {
+	#footer-widgets.two .footer-widgets {
+		float: left;
+		width: 48%;
+	}
+	#footer-widgets.two .footer-widgets.first {
+		margin-right: 4%;
+	}
+	#footer-widgets.three .footer-widgets {
+		float: left;
+		width: 31%;
+	}
+	#footer-widgets.three .footer-widgets.first,
+	#footer-widgets.three .footer-widgets.second {
+		margin-right: 3.5%;
+	}
+	#footer-widgets.four .footer-widgets {
+		float: left;
+		width: 22%;
+	}
+	#footer-widgets.four .footer-widgets.first,
+	#footer-widgets.four .footer-widgets.second,
+	#footer-widgets.four .footer-widgets.third {
+		margin-right: 4%;
+	}
+}	
