@@ -53,6 +53,18 @@ http://blog.typekit.com/2011/11/09/type-study-sizing-the-legible-letter/
 
 @import url("../twentytwelve/style.css");
 
+/* two column page template */
+.page-template-page-templatesfront-page-extra-col-php .site-content {
+	width: 100%;
+}
+.page-template-page-templatesfront-page-extra-col-php .two-columns.site-content .content {
+	width: 48%;
+	float: left;
+}
+.page-template-page-templatesfront-page-extra-col-php .two-columns.site-content .content2 {
+	margin-left: 4%;
+}
+
 #page {
 	border-radius: 2px;
 }
