@@ -21,6 +21,10 @@ function tte_settings_page() {
         <form method="post" action="options.php">  
             <?php wp_nonce_field('update-options') ?>
 			<div style="float:left; margin-right: 20px;">
+				<h3>Settings</h3>
+				<p><strong>Header thumbnail size (default 'single-post-thumbnail'):</strong><br />
+					<input type="text" name="tte_header_thumbnail_size" size="45" value="<?php echo get_option('tte_header_thumbnail_size'); ?>" />
+				</p>  
 				<h3>Social networks</h3>  
 				<p><strong>Twitter ID:</strong><br />  
 					<input type="text" name="tte_twitterid" size="45" value="<?php echo get_option('tte_twitterid'); ?>" />  

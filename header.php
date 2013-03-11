@@ -25,7 +25,7 @@
 <style type="text/css">
 	<?php echo get_option("tte_css_text"); ?>
 </style>
-<link rel="icon" href="<?php echo get_option("tte_css_text"); ?>" type="image/png" />
+<link rel="icon" href="<?php echo get_option("tte_favicon"); ?>" type="image/png" />
 <?php wp_head(); ?>
 </head>
 
@@ -33,7 +33,7 @@
 <div id="page" class="hfeed site">
 	<header id="masthead" class="site-header" role="banner">
 		<?php if (get_option('tte_logo') != "") : ?>
-		<div id="tte_logo"><img alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" src="<?php echo get_option('tte_logo'); ?>" /></div>
+		<div id="tte_logo"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><img alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" src="<?php echo get_option('tte_logo'); ?>" /></a></div>
 		<?php endif; ?>
 		<hgroup <?php if (get_option('tte_logo') != "") { echo "style='display:none;'"; } ?>>
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
@@ -48,8 +48,10 @@
 
 		<?php 
 		$header_image = get_header_image();
+		$header_thumbnail_size = 'single-post-thumbnail';
+		if (get_option('tte_header_thumbnail_size') != "") { $header_thumbnail_size = get_option('tte_header_thumbnail_size'); }
 		if ( ! empty ( $post ) && has_post_thumbnail( $post->ID ) ) :
-			$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+			$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $header_thumbnail_size );
 		endif;
 		if ( ! empty( $featured_image ) && !is_page_template( 'page-templates/front-page.php' ) ) : ?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo esc_url( $featured_image[0] ); ?>" class="header-image" alt="" /></a>
