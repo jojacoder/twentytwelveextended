@@ -121,17 +121,18 @@ http://blog.typekit.com/2011/11/09/type-study-sizing-the-legible-letter/
 
 /* RECENT FACEBOOK POSTS PLUGIN */
 .widget_rfb_widget li {
+	clear: both;
 	list-style-type: none !important;
 	margin-bottom: 1.714285714rem !important;
 	margin-bottom: 24px;
 }
-.widget_rfb_widget .rfb_text {
+.widget_rfb_widget p {
 	float: left;
 	width: 70%;
 	clear: none;
 }
 .widget_rfb_widget .rfb_image {
-	float: left;
+	float: right;
 	width: 28%;
 	margin-left: 2%;
 	clear: none;
