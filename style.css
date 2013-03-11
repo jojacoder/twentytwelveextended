@@ -53,6 +53,9 @@ http://blog.typekit.com/2011/11/09/type-study-sizing-the-legible-letter/
 
 @import url("../twentytwelve/style.css");
 
+h1, h2, h3, h4, h5, h6 {
+	clear: none;
+}
 /* two column page template */
 .page-template-page-templatesfront-page-extra-col-php .site-content {
 	width: 100%;
