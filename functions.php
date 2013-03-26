@@ -25,6 +25,17 @@ function tte_settings_page() {
 				<p><strong>Header thumbnail size (default 'single-post-thumbnail'):</strong><br />
 					<input type="text" name="tte_header_thumbnail_size" size="45" value="<?php echo get_option('tte_header_thumbnail_size'); ?>" />
 				</p>  
+				<p><strong>Disable feed in head:</strong>
+					<input type="checkbox" name="tte_disable_feed" value="1" <?php echo (get_option('tte_disable_feed') == "1")?"checked":""; ?> />
+				</p>  
+				<p><strong>Disable twentytwelve google fonts:</strong>
+					<input type="checkbox" name="tte_disable_twentytwelve_fonts" value="1" <?php echo (get_option('tte_disable_twentytwelve_fonts') == "1")?"checked":""; ?> />
+				</p>  
+				<p><strong>Remove loading of comment-reply js:</strong>
+					<input type="checkbox" name="tte_disable_comment_reply" value="1" <?php echo (get_option('tte_disable_comment_reply') == "1")?"checked":""; ?> />
+				</p>  
+				
+				
 				<h3>Social networks</h3>  
 				<p><strong>Twitter ID:</strong><br />  
 					<input type="text" name="tte_twitterid" size="45" value="<?php echo get_option('tte_twitterid'); ?>" />  
@@ -49,7 +60,7 @@ function tte_settings_page() {
 				</p>
 			</div>
             <input type="hidden" name="action" value="update" />  
-			<input type="hidden" name="page_options" value="tte_twitterid,tte_fb_link,tte_css_text,tte_logo,tte_favicon" />
+			<input type="hidden" name="page_options" value="tte_twitterid,tte_fb_link,tte_css_text,tte_logo,tte_favicon,tte_header_thumbnail_size,tte_disable_feed,tte_disable_twentytwelve_fonts,tte_disable_comment_reply" />
 		</form>  
     </div> 
 </div>
@@ -72,6 +83,13 @@ function tte_admin_scripts() {
 	//wp_enqueue_script( 'jquery-map-ui', get_stylesheet_directory_uri() . '/js/jquery.ui.map.js', array('jquery'), '1.0', true );
 }
 function tte_scripts() {
+	if (get_option("tte_disable_twentytwelve_fonts") == "1") {
+		wp_dequeue_style( 'twentytwelve-fonts' );
+	}
+	if (get_option("tte_disable_comment_reply") == "1") {
+		wp_dequeue_script( 'comment-reply' );
+	}
+
 	wp_enqueue_script('tte-scripts', get_stylesheet_directory_uri() . '/js/tte.js', array('jquery'), '1.0', true );
 	//wp_enqueue_script( 'jquery-maps', 'http://maps.google.com/maps/api/js?sensor=true', array(), '1.0', true );
 	//wp_enqueue_script( 'jquery-map-ui', get_stylesheet_directory_uri() . '/js/jquery.ui.map.js', array('jquery'), '1.0', true );
@@ -82,7 +100,7 @@ if (isset($_GET['page']) && $_GET["page"] == "tte-settings-page") {
 	add_action('admin_init', 'tte_admin_scripts' );
 }
 
-add_action('wp_enqueue_scripts', 'tte_scripts' );
+add_action('wp_enqueue_scripts', 'tte_scripts', 11 );
 
 
 /*
@@ -140,5 +158,17 @@ function tte_widgets_init() {
 	) );
 }
 add_action( 'widgets_init', 'tte_widgets_init' );
+
+
+/**
+ * Sets up theme defaults and registers the various WordPress features that
+ * Twenty Twelve Extended supports.
+ */
+function tte_after_setup() {
+	if (get_option('tte_disable_feed') == "1") {
+		remove_theme_support( 'automatic-feed-links' );
+	}
+}
+add_action( 'after_setup_theme', 'tte_after_setup', 11 );
 
 ?>

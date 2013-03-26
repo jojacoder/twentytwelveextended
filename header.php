@@ -25,7 +25,9 @@
 <style type="text/css">
 	<?php echo get_option("tte_css_text"); ?>
 </style>
+<?php if (get_option("tte_favicon") != "") : ?> 
 <link rel="icon" href="<?php echo get_option("tte_favicon"); ?>" type="image/png" />
+<?php endif; ?>
 <?php wp_head(); ?>
 </head>
 
