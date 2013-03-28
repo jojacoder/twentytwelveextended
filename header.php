@@ -31,8 +31,8 @@
 <?php if (get_option('tte_google_analytics') != "") : ?> 
 <script type="text/javascript">
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '<?php echo get_option('tte_google_analytics') != ""; ?>']);
-  _gaq.push(['_setDomainName', '<?php echo get_option('tte_google_analytics_domain') != ""; ?>']);
+  _gaq.push(['_setAccount', '<?php echo get_option('tte_google_analytics'); ?>']);
+  _gaq.push(['_setDomainName', '<?php echo get_option('tte_google_analytics_domain'); ?>']);
   _gaq.push(['_setAllowLinker', true]);
   _gaq.push(['_trackPageview']);
 
