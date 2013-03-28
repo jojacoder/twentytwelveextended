@@ -305,7 +305,7 @@ function tte_gallery_shortcode($attr) {
 		$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_link($id, $size, false, false) : wp_get_attachment_link($id, $size, true, false);
 		/* override gallery item link */
 //		if (get_option("tte_gallery_size") != "") {
-			$link = get_the_post_thumbnail($id,"large");
+//			$link = get_the_post_thumbnail($id,"large");
 //		}
 		
 		$output .= "<{$itemtag} class='gallery-item'>";
@@ -328,6 +328,6 @@ function tte_gallery_shortcode($attr) {
 			<br style='clear: both;' />
 		</div>\n";
 
-	return $output . "blaj";
+	return $output . "<span style='display:none'>test</span>";
 }
 ?>
