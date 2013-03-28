@@ -66,7 +66,7 @@ function tte_settings_page() {
 				</p>
 			</div>
             <input type="hidden" name="action" value="update" />  
-			<input type="hidden" name="page_options" value="tte_twitterid,tte_fb_link,tte_css_text,tte_logo,tte_favicon,tte_header_thumbnail_size,tte_disable_feed,tte_disable_twentytwelve_fonts,tte_disable_comment_reply" />
+			<input type="hidden" name="page_options" value="tte_twitterid,tte_fb_link,tte_css_text,tte_logo,tte_favicon,tte_header_thumbnail_size,tte_disable_feed,tte_disable_twentytwelve_fonts,tte_disable_comment_reply,tte_google_analytics,tte_google_analytics_domain" />
 		</form>  
     </div> 
 </div>
