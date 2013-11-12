@@ -122,32 +122,6 @@ h1, h2, h3, h4, h5, h6 {
 	float: right;
 }
 
-/* RECENT FACEBOOK POSTS PLUGIN */
-.widget_rfb_widget li {
-	clear: both;
-	float: left;
-	list-style-type: none !important;
-	margin-bottom: 1.714285714rem !important;
-	margin-bottom: 24px;
-}
-.widget_rfb_widget p {
-	float: left;
-	width: 70%;
-	clear: none;
-}
-.widget_rfb_widget .rfb_image {
-	float: right;
-	width: 28%;
-	margin-left: 2%;
-	clear: none;
-}
-.widget_rfb_widget .rfb_image img {
-	width: 100%;
-}
-.widget_rfb_widget p {
-	margin-bottom: 0 !important;
-}
-
 /* =Media queries
 -------------------------------------------------------------- */
 
