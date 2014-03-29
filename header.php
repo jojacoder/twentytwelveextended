@@ -47,6 +47,24 @@
 </head>
 
 <body <?php body_class(); ?>>
+<?php 
+$header_image = get_header_image();
+		$header_thumbnail_size = 'single-post-thumbnail';
+		$use_header_image_as_background = (get_option('tte_header_image_as_background') == 1);
+		if (get_option('tte_header_thumbnail_size') != "") { $header_thumbnail_size = get_option('tte_header_thumbnail_size'); }
+		if ( ! empty ( $post ) && has_post_thumbnail( $post->ID ) ) :
+			$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $header_thumbnail_size );
+		endif;		
+		if ($use_header_image_as_background) : 
+			$pre_header_img = "<div class='tte-header-background-image'>";
+			$post_header_img = "</div>";
+			if ( ! empty( $featured_image ) ) : ?>
+				<?php echo $pre_header_img; ?><img src="<?php echo esc_url( $featured_image[0] ); ?>" class="header-image" alt="" /><?php echo $post_header_img; ?>
+			<?php elseif ( ! empty( $header_image ) ) : ?>
+				<?php echo $pre_header_img; ?><img src="<?php echo esc_url( $header_image ); ?>" class="header-image" alt="" /><?php echo $post_header_img; ?>
+			<?php endif;  ?>
+		<?php endif;
+		?>
 <div id="page" class="hfeed site">
 	<header id="masthead" class="site-header" role="banner">
 		<?php if (get_option('tte_logo') != "") : ?>
@@ -64,17 +82,16 @@
 		</nav><!-- #site-navigation -->
 
 		<?php 
-		$header_image = get_header_image();
-		$header_thumbnail_size = 'single-post-thumbnail';
-		if (get_option('tte_header_thumbnail_size') != "") { $header_thumbnail_size = get_option('tte_header_thumbnail_size'); }
-		if ( ! empty ( $post ) && has_post_thumbnail( $post->ID ) ) :
-			$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $header_thumbnail_size );
-		endif;
-		if ( ! empty( $featured_image ) && !is_page_template( 'page-templates/front-page.php' ) ) : ?>
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo esc_url( $featured_image[0] ); ?>" class="header-image" alt="" /></a>
-		<?php elseif ( ! empty( $header_image ) ) : ?>
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo esc_url( $header_image ); ?>" class="header-image" alt="" /></a>
-		<?php endif; ?>
+		
+		if (!$use_header_image_as_background) : 
+			$pre_header_img = "<a href='" . esc_url( home_url( '/' ) ) . "'>";
+			$post_header_img = "</a>";
+			if ( ! empty( $featured_image ) && !is_page_template( 'page-templates/front-page.php' ) ) : ?>
+				<?php echo $pre_header_img; ?><img src="<?php echo esc_url( $featured_image[0] ); ?>" class="header-image" alt="" /><?php echo $post_header_img; ?>
+			<?php elseif ( ! empty( $header_image ) ) : ?>
+				<?php echo $pre_header_img; ?><img src="<?php echo esc_url( $header_image ); ?>" class="header-image" alt="" /><?php echo $post_header_img; ?>
+			<?php endif;  ?>
+		<?php endif;  ?>
 	</header><!-- #masthead -->
 
 	<div id="main" class="wrapper">

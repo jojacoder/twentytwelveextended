@@ -121,12 +121,83 @@ h1, h2, h3, h4, h5, h6 {
 #tte_expand_collapse_children {
 	float: right;
 }
+.tte-2-cols {
+	float: left;
+	margin-right: 3%;
+	width: 47%;
+}
+.tte-3-cols {
+	float: left;
+	margin-right: 3%;
+	width: 30%;
+}
+.tte-4-cols {
+	float: left;
+	margin-right: 3%;
+	width: 22%;
+}
+.tte-5-cols {
+	float: left;
+	margin-right: 2%;
+	width: 18%;
+}
 
+.tte-column-wrapper,
+.tte-column-wrapper .tte-column {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.tte-column-wrapper {
+	margin-left: -24px;
+}
+.tte-column-wrapper .tte-column {
+	float: left;
+	padding-bottom: 24px;
+	padding-left: 24px;
+}
+.tte-column-wrapper .tte-one-whole,
+.tte-column-wrapper .tte-one-half ,
+.tte-column-wrapper .tte-one-quarter,
+.tte-column-wrapper .tte-three-quarters,
+.tte-column-wrapper .tte-one-third,
+.tte-column-wrapper .tte-two-thirds {
+	width: 100%;
+}
+.site {
+	position: relative;
+	z-index:2;
+}
+.tte-header-background-image {
+	position: fixed;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	z-index:1;
+}
 /* =Media queries
 -------------------------------------------------------------- */
 
 /* Min width of 600 pixels. */
 @media screen and (min-width: 600px) {
+	.tte-column-wrapper .tte-one-half {
+		width: 50%;
+	}
+	.tte-column-wrapper .tte-one-quarter {
+		width: 25%;
+	}
+	.tte-column-wrapper .tte-three-quarters {
+		width: 75%;
+	}
+
+	.tte-column-wrapper .tte-one-third {
+		width: 33.3%;
+	}
+	.tte-column-wrapper .tte-two-thirds {
+		width: 66.6%;
+	}
 	#footer-widgets.two .footer-widgets {
 		float: left;
 		width: 48%;

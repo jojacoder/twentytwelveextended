@@ -25,6 +25,9 @@ function tte_settings_page() {
 				<p><strong>Header thumbnail size (default 'single-post-thumbnail'):</strong><br />
 					<input type="text" name="tte_header_thumbnail_size" size="45" value="<?php echo get_option('tte_header_thumbnail_size'); ?>" />
 				</p>  
+				<p><strong>Use header image as background:</strong>
+					<input type="checkbox" name="tte_header_image_as_background" value="1" <?php echo (get_option('tte_header_image_as_background') == "1")?"checked":""; ?> />
+				</p>  
 				<p><strong>Disable feed in head:</strong>
 					<input type="checkbox" name="tte_disable_feed" value="1" <?php echo (get_option('tte_disable_feed') == "1")?"checked":""; ?> />
 				</p>  
@@ -66,7 +69,7 @@ function tte_settings_page() {
 				</p>
 			</div>
             <input type="hidden" name="action" value="update" />  
-			<input type="hidden" name="page_options" value="tte_twitterid,tte_fb_link,tte_css_text,tte_logo,tte_favicon,tte_header_thumbnail_size,tte_disable_feed,tte_disable_twentytwelve_fonts,tte_disable_comment_reply,tte_google_analytics,tte_google_analytics_domain" />
+			<input type="hidden" name="page_options" value="tte_twitterid,tte_fb_link,tte_css_text,tte_logo,tte_favicon,tte_header_thumbnail_size,tte_disable_feed,tte_header_image_as_background,tte_disable_twentytwelve_fonts,tte_disable_comment_reply,tte_google_analytics,tte_google_analytics_domain" />
 		</form>  
     </div> 
 </div>
@@ -193,7 +196,23 @@ add_shortcode('gallery', 'tte_gallery_shortcode');
  * @param array $attr Attributes of the shortcode.
  * @return string HTML content to display gallery.
  */
-function tte_gallery_shortcode($attr) {
+
+ function tte_filter_content($content) {
+	$num_columns = get_post_meta( get_the_ID(), "tte_num_columns", true );
+	if ($num_columns == "") $num_columns = 1;
+	
+	if ($num_columns > 1) :
+		$words = explode(" ", $content);
+		$num_chars = strlen($content);
+		$num_chars_per_column = ceil($num_chars / $num_columns) +10;
+		return "<div class='tte-$num_columns-wrapper'><div class='tte-$num_columns-cols'>" . wordwrap($content, $num_chars_per_column, "</div><div class='tte-$num_columns-cols'>", true) . "</div></div>";
+	else :
+		return $content;
+	endif;
+ }
+ add_filter( 'the_content', tte_filter_content );
+ 
+ function tte_gallery_shortcode($attr) {
 	$post = get_post();
 
 	static $instance = 0;
@@ -221,15 +240,16 @@ function tte_gallery_shortcode($attr) {
 	extract(shortcode_atts(array(
 		'order'      => 'ASC',
 		'orderby'    => 'menu_order ID',
-		'id'         => $post->ID,
+		'id'         => $post ? $post->ID : 0,
 		'itemtag'    => 'dl',
 		'icontag'    => 'dt',
 		'captiontag' => 'dd',
 		'columns'    => 3,
 		'size'       => 'thumbnail',
 		'include'    => '',
-		'exclude'    => ''
-	), $attr));
+		'exclude'    => '',
+		'link'		 => ''
+	), $attr, 'gallery'));
 
 	$id = intval($id);
 	if ( 'RAND' == $order )
@@ -295,7 +315,7 @@ function tte_gallery_shortcode($attr) {
 				margin-left: 0;
 			}
 		</style>
-		<!-- see gallery_shortcode() in wp-includes/media.php -->";
+		<!-- see tte_gallery_shortcode() in twentytwelveextended/functions.php -->";
 	$size_class = sanitize_html_class( $size );
 	$gallery_div = "<div id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class}'>";
 	$output = apply_filters( 'gallery_style', $gallery_style . "\n\t\t" . $gallery_div );
@@ -330,4 +350,77 @@ function tte_gallery_shortcode($attr) {
 
 	return $output . "<span style='display:none'>test</span>";
 }
-?>
+
+
+if(function_exists("register_field_group"))
+{
+	register_field_group(array (
+		'id' => 'acf_column-based-page-template',
+		'title' => 'Column Based Page Template',
+		'fields' => array (
+			array (
+				'key' => 'field_53164d3daf154',
+				'label' => 'Kolumner',
+				'name' => 'tte_columns',
+				'type' => 'flexible_content',
+				'layouts' => array (
+					array (
+						'label' => 'Column',
+						'name' => 'tte_column',
+						'display' => 'row',
+						'sub_fields' => array (
+							array (
+								'key' => 'field_53164d8faf155',
+								'label' => 'Innehåll',
+								'name' => 'tte_content',
+								'type' => 'wysiwyg',
+								'column_width' => '',
+								'default_value' => '',
+								'toolbar' => 'full',
+								'media_upload' => 'yes',
+							),
+							array (
+								'key' => 'field_53164db2af156',
+								'label' => 'Bredd',
+								'name' => 'tte_cols_class',
+								'type' => 'select',
+								'column_width' => '',
+								'choices' => array (
+									'one-whole' => 'En hel',
+									'one-half' => 'En halv',
+									'one-third' => 'En tredjedel',
+									'two-thirds' => 'Två tredjedelar',
+									'one-quarter' => 'En fjärdedel',
+									'three-quarters' => 'Tre fjärdedelar',
+								),
+								'default_value' => '',
+								'allow_null' => 0,
+								'multiple' => 0,
+							),
+						),
+					),
+				),
+				'button_label' => 'Add column',
+			),
+		),
+		'location' => array (
+			array (
+				array (
+					'param' => 'page_template',
+					'operator' => '==',
+					'value' => 'page-templates/page-with-columns.php',
+					'order_no' => 0,
+					'group_no' => 0,
+				),
+			),
+		),
+		'options' => array (
+			'position' => 'normal',
+			'layout' => 'no_box',
+			'hide_on_screen' => array (
+				0 => 'the_content',
+			),
+		),
+		'menu_order' => 0,
+	));
+}
