@@ -40,10 +40,10 @@ get_header(); ?>
 										echo "'>";
 										// add support for WP Lightbox 2 by Pankaj Jha
 										if (function_exists("jqlb_apply_lightbox")) {
-											echo jqlb_apply_lightbox(get_sub_field('tte_content'));
+											echo do_shortcode(jqlb_apply_lightbox(get_sub_field('tte_content')));
 										}
 										else {
-											the_sub_field('tte_content');
+											echo do_shortcode(get_sub_field('tte_content'));
 										}
 										echo "</div>";
 										 
