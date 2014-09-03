@@ -161,6 +161,7 @@ h1, h2, h3, h4, h5, h6 {
 .tte-column-wrapper .tte-one-whole-hidden-palm {
 	display: none;
 }
+.tte-column-wrapper .tte-one-whole-hidden-palm ,
 .tte-column-wrapper .tte-one-fifth,
 .tte-column-wrapper .tte-two-fifths,
 .tte-column-wrapper .tte-three-fifths,
