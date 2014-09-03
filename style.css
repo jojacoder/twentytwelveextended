@@ -158,6 +158,13 @@ h1, h2, h3, h4, h5, h6 {
 	padding-bottom: 24px;
 	padding-left: 24px;
 }
+.tte-column-wrapper .tte-one-whole-hidden-palm {
+	display: none;
+}
+.tte-column-wrapper .tte-one-fifth,
+.tte-column-wrapper .tte-two-fifths,
+.tte-column-wrapper .tte-three-fifths,
+.tte-column-wrapper .tte-four-fifths,
 .tte-column-wrapper .tte-one-whole,
 .tte-column-wrapper .tte-one-half ,
 .tte-column-wrapper .tte-one-quarter,
@@ -182,6 +189,21 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Min width of 600 pixels. */
 @media screen and (min-width: 600px) {
+	.tte-column-wrapper .tte-one-whole-hidden-palm {
+		display: block;
+	}
+	.tte-column-wrapper .tte-one-fifth {
+		width: 20%;
+	}
+	.tte-column-wrapper .tte-two-fifths {
+		width: 40%;
+	}
+	.tte-column-wrapper .tte-three-fifths {
+		width: 60%;
+	}
+	.tte-column-wrapper .tte-four-fifths {
+		width: 80%;
+	}
 	.tte-column-wrapper .tte-one-half {
 		width: 50%;
 	}
